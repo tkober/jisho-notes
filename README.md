@@ -1,1 +1,1 @@
-# jisho-notes
+# Jisho Notes
