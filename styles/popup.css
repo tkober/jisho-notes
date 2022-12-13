@@ -152,3 +152,9 @@ a:active { text-decoration: none; }
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #379516;}
 .dropdown:hover .dropbtn:disabled {background-color: #c8c8c8;}
+
+.credits {
+    text-align: center;
+    color: #7b7b7b;
+    font-size: 10px;
+}
