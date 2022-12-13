@@ -1,0 +1,154 @@
+body {
+    width: 25rem;
+    min-height: 200px;
+    max-height: 600px;
+}
+
+ul {
+    list-style-type: none;
+    padding-inline-start: 0;
+    margin: 1rem 0;
+}
+
+li {
+    padding: 0.25rem;
+}
+li:nth-child(odd) {
+    background: #80808030;
+}
+li:nth-child(even) {
+    background: #ffffff;
+}
+
+h3,
+p {
+    margin: 0;
+}
+
+a { color: #000000; }
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; color: #7b7b7b; }
+a:active { text-decoration: none; }
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.icon-button-sdfdsf {
+    background-color: #55d726;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+.icon-button span {
+    vertical-align: middle;
+}
+
+.note-type-cell {
+    width:0.1%;
+    white-space: nowrap;
+}
+
+.note-type {
+    background-color: #55d726;
+    padding: 5px 10px;
+    height: 20px;
+    border-radius: 50vh;
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: smaller;
+}
+
+.summary {
+    font-size: larger;
+}
+
+.note {
+    width: 100%;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.notes-list-caption {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.empty-list {
+    position: relative;
+    min-height: 120px;
+}
+
+.empty-list-text {
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+}
+
+.neko {
+    font-size: 40px;
+    color: #9b9b9b;
+    margin-bottom: 10px;
+}
+
+.dropbtn {
+    background-color: #55d726;
+    color: white;
+    padding: 5px 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:disabled {
+    cursor: default;
+    background-color: #c8c8c8;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #379516;}
+.dropdown:hover .dropbtn:disabled {background-color: #c8c8c8;}

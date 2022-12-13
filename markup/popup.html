@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/popup.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+<div class="clearfix">
+    <div class="dropdown left">
+        <button class="dropbtn" id="clear-all-button"><span class="material-symbols-outlined">delete</span></button>
+    </div>
+    <div class="dropdown right">
+        <button class="dropbtn"><span class="material-symbols-outlined">ios_share</span></button>
+        <div class="dropdown-content" id="download-actions">
+            <template id="download-action-template"><a href="#"></a></template>
+        </div>
+    </div>
+</div>
+<div>
+    <template id="li_template">
+        <li>
+            <table class="note">
+                <tr>
+                    <td class="note-type-cell text-left">
+                        <label class="note-type"></label>
+                    </td>
+                    <td class="text-left">
+                        <a class="summary" href="#"></a>
+                    </td>
+                    <td class="text-right">
+                        <a class="delete-note-action" href="#"><span class="material-symbols-outlined">close</span></a>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </template>
+    <template id="empty-list-template">
+        <div class="empty-list">
+            <div class="empty-list-text">
+                <div class="neko">/ᐠ｡‸｡ᐟ\</div>
+                <div>You do not have any notes yet<br />But here is a cat</div>
+            </div>
+        </div>
+    </template>
+    <h3 class="notes-list-caption">Saved Notes:</h3>
+    <ul id="notes-list">
+    </ul>
+</div>
+
+<script src="../scripts/popup.js" type="module"></script>
+</body>
+</html>
