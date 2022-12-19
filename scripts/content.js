@@ -114,13 +114,17 @@ function DropdownAction(title, onClick) {
 function createWordNote(noteType, tagsElement, meaningElement) {
     const representation = gatherJapanese();
     // 1. japanese
-    const japanese = representation.withFurigana;
+    let japanese = representation.withFurigana;
     // 2. english
     const english = meaningElement.textContent.trim();
     // 3. type
     const type = tagsElement.textContent.trim();
     // 4. jlpt-level
     const jlptLevel = getJlptLevel();
+
+    if (type.includes('Na-adjective')) {
+        japanese += ' (な)';
+    }
 
     const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}`;
     let conjugations = [];
