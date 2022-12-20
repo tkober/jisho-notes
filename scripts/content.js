@@ -329,7 +329,13 @@ function getKanjiJlptLevel() {
 
 function getStrokeOrderDiagram() {
     const containerElement = document.getElementsByClassName('stroke_order_diagram--outer_container').item(0)
-    const style = '<style>.stroke_order_diagram--outer_container {width: 100%;overflow-x: auto;overflow-y: hidden } .stroke_order_diagram--guide_line {fill: none;stroke: #ddd;stroke-width: 2;stroke-linecap: square;stroke-linejoin: square;stroke-dasharray: 5, 5 } .stroke_order_diagram--bounding_box {fill: none;stroke: #ddd;stroke-width: 2;stroke-linecap: square;stroke-linejoin: square } .stroke_order_diagram--current_path {fill: none;stroke: #000;stroke-width: 3;stroke-linecap: round;stroke-linejoin: round } .stroke_order_diagram--existing_path {fill: none;stroke: #aaa;stroke-width: 3;stroke-linecap: round;stroke-linejoin: round } .stroke_order_diagram--path_start {fill: rgba(255, 0, 0, 0.7);stroke: none}</style>';
+    const style = '<style>.stroke_order_diagram--outer_container {width: 100%;overflow-x: auto;overflow-y: hidden } ' +
+        '.stroke_order_diagram--guide_line {fill: none;stroke: #ddd;stroke-width: 2;stroke-linecap: square;' +
+        'stroke-linejoin: square;stroke-dasharray: 5, 5 } .stroke_order_diagram--bounding_box {fill: none;stroke: ' +
+        '#ddd;stroke-width: 2;stroke-linecap: square;stroke-linejoin: square } .stroke_order_diagram--current_path {' +
+        'fill: none;stroke: #000;stroke-width: 3;stroke-linecap: round;stroke-linejoin: round } ' +
+        '.stroke_order_diagram--existing_path {fill: none;stroke: #aaa;stroke-width: 3;stroke-linecap: round;' +
+        'stroke-linejoin: round } .stroke_order_diagram--path_start {fill: rgba(255, 0, 0, 0.7);stroke: none}</style>';
     return `${style.trim()}<div class="stroke_order_diagram--outer_container">${containerElement.innerHTML.trim()}</div>`;
 }
 
