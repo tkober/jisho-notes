@@ -8,7 +8,8 @@
 1. japanese (with furigana annotations)
 2. english
 3. type
-4. jlpt-level   
+4. jlpt-level
+5. supplemental-information
 ```
 
 ### Kanji
@@ -27,6 +28,7 @@
 2. english
 3. type
 4. jlpt-level   
+5. supplemental-information
 ```
 
 ### Verb Conjugation
@@ -36,11 +38,12 @@
  2. english
  3. type
  4. jlpt-level   
- 5. non-past-affirmative
- 6. non-past-negative
- 7. non-past-polite-affirmative
- 8. non-past-polite-negative
- 9. past-affirmative
+ 5. supplemental-information
+ 6. non-past-affirmative
+ 7. non-past-negative
+ 8. non-past-polite-affirmative
+ 9. non-past-polite-negative
+10. past-affirmative
 11. past-negative
 12. past-polite-affirmative
 13. past-polite-negative
@@ -64,14 +67,15 @@
  1. japanese (with furigana annotations)
  2. english
  3. type
- 4. jlpt-level   
- 5. non-past-affirmative
- 6. non-past-negative
- 7. non-past-short-affirmative
- 8. non-past-short-negative
- 9. past-affirmative 
-10. past-negative
-11. past-short-affirmative
-12. past-short-negative
-13. te-form
+ 4. jlpt-level
+ 5. supplemental-information
+ 6. non-past-affirmative
+ 7. non-past-negative
+ 8. non-past-short-affirmative
+ 9. non-past-short-negative
+10. past-affirmative 
+11. past-negative
+12. past-short-affirmative
+13. past-short-negative
+14. te-form
 ```

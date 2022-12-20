@@ -121,15 +121,17 @@ function createWordNote(noteType, tagsElement, meaningElement) {
     const type = tagsElement.textContent.trim();
     // 4. jlpt-level
     const jlptLevel = getJlptLevel();
+    // 5. supplemental-information
+    const supplementalInformation = getSupplementalInformation();
 
     if (type.includes('Na-adjective')) {
         japanese += ' (な)';
     }
 
-    const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}`;
+    const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
     let conjugations = [];
     if (NOTE_TYPE_CONJUGATION === noteType) {
-        // 5... Conjugations
+        // 6... Conjugations
         const conjugationItems = gatherConjugations(type);
          conjugations = conjugationItems.join('\t');
         if (type.includes('verb')) {
@@ -213,6 +215,14 @@ function getJlptLevel() {
         }
     }
 
+    return '';
+}
+
+function getSupplementalInformation() {
+    const element = document.getElementsByClassName('supplemental_info');
+    if (element.length > 0) {
+        return element.item(0).textContent.trim();
+    }
     return '';
 }
 
