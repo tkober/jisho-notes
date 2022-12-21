@@ -6,7 +6,7 @@
 
 ### Kanji
 
-[›› Example card](example-cards%2Fkanji-standalone%2Fwriting%2FREADME.md)
+[›› Example card](example-cards%2Fkanji-standalone%2Fwriting)
 
 ```
 1. kanji    
@@ -19,7 +19,7 @@
 
 ### Kanji Reading
 
-[›› Example card](example-cards%2Fkanji-compounds%2FREADME.md)
+[›› Example card](example-cards%2Fkanji-compounds)
 
 ```
 1. japanese (with furigana annotations)
@@ -33,7 +33,7 @@
 
 ### Verb Conjugation
 
-[›› Example card](example-cards%2Fverb-conjugations%2FREADME.md)
+[›› Example card](example-cards%2Fverb-conjugations)
 
 ```
  1. japanese (with furigana annotations)
@@ -67,7 +67,7 @@
 
 ### Adjective Conjugation
 
-[›› Example card](example-cards%2Fadjective-conjugations%2FREADME.md)
+[›› Example card](example-cards%2Fadjective-conjugations)
 
 ```
  1. japanese (with furigana annotations)
@@ -90,7 +90,7 @@
 
 ### Vocabulary
 
-[›› Example card](example-cards%2Fvocabulary%2FREADME.md)
+[›› Example card](example-cards%2Fvocabulary)
 
 ```
 1. japanese (with furigana annotations)
