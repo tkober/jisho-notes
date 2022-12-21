@@ -6,6 +6,8 @@
 
 ### Kanji
 
+[›› Example card](example-cards%2Fkanji-standalone%2Fwriting%2FREADME.md)
+
 ```
 1. kanji    
 2. meaning
@@ -13,7 +15,11 @@
 4. stroke-order   
 ```
 
+![kanji_writing.jpg](doc%2Fscreenshots%2Fkanji_writing.jpg)
+
 ### Kanji Reading
+
+[›› Example card](example-cards%2Fkanji-compounds%2FREADME.md)
 
 ```
 1. japanese (with furigana annotations)
@@ -23,7 +29,11 @@
 5. supplemental-information
 ```
 
+![kanji_readings.jpg](doc%2Fscreenshots%2Fkanji_readings.jpg)
+
 ### Verb Conjugation
+
+[›› Example card](example-cards%2Fverb-conjugations%2FREADME.md)
 
 ```
  1. japanese (with furigana annotations)
@@ -53,7 +63,11 @@
 25. imperative-negative
 ```
 
+![verb_conjugations.jpg](doc%2Fscreenshots%2Fverb_conjugations.jpg)
+
 ### Adjective Conjugation
+
+[›› Example card](example-cards%2Fadjective-conjugations%2FREADME.md)
 
 ```
  1. japanese (with furigana annotations)
@@ -72,7 +86,11 @@
 14. te-form
 ```
 
+![adjective_conjugation.jpg](doc%2Fscreenshots%2Fadjective_conjugation.jpg)
+
 ### Vocabulary
+
+[›› Example card](example-cards%2Fvocabulary%2FREADME.md)
 
 ```
 1. japanese (with furigana annotations)
@@ -81,3 +99,4 @@
 4. jlpt-level
 5. supplemental-information
 ```
+![vocabulary.jpg](doc%2Fscreenshots%2Fvocabulary.jpg)
