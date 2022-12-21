@@ -69,15 +69,15 @@ function addKanjiNoteButton() {
 
 function WordCardDropdown(tagsElement, meaningElement) {
     return Dropdown([
-        DropdownAction('Vocabulary Card', (() => { createWordNote(NOTE_TYPE_VOCABULARY, tagsElement, meaningElement) })),
-        DropdownAction('Kanji Compound Card', (() => { createWordNote(NOTE_TYPE_KANJI_READING, tagsElement, meaningElement) })),
-        DropdownAction('Conjugation Card', (() => { createWordNote(NOTE_TYPE_CONJUGATION, tagsElement, meaningElement) }))
+        DropdownAction('Vocabulary Note', (() => { createWordNote(NOTE_TYPE_VOCABULARY, tagsElement, meaningElement) })),
+        DropdownAction('Kanji Compound Note', (() => { createWordNote(NOTE_TYPE_KANJI_READING, tagsElement, meaningElement) })),
+        DropdownAction('Conjugation Note', (() => { createWordNote(NOTE_TYPE_CONJUGATION, tagsElement, meaningElement) }))
     ]);
 }
 
 function KanjiCardDropdown(kanjiTextContent, meaningsTextContent) {
     return Dropdown([
-        DropdownAction('Kanji Meaning Card', (() => { createKanjiNote(kanjiTextContent, meaningsTextContent) })),
+        DropdownAction('Kanji Note', (() => { createKanjiNote(kanjiTextContent, meaningsTextContent) })),
         DropdownAction('Copy Stroke Order', (() => { copyStrokeOrderDiagramToClipboard() }))
     ]);
 }
