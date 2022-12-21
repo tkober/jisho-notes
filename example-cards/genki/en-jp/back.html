@@ -1,0 +1,72 @@
+{{FrontSide}}
+
+<div class="section-header">
+    <span>Translation:</span>
+</div>
+{{#kanjis}}
+<div class="furigana visible">
+    <span>{{japanese_kana}}</span>
+</div>
+<div class="japanese">
+    <span>{{kanjis}}</span>
+</div>
+{{/kanjis}}
+
+{{^kanjis}}
+<div class="japanese">
+    <span>{{japanese_kana}}</span>
+</div>
+{{/kanjis}}
+
+<div class="sound">
+    <span>{{sound}}</span>
+</div>
+
+<div class="additional-information">
+    {{additional_information}}
+</div>
+
+{{#kanji_meaning}}
+<div class="section-header spacer">
+    <span>Kanji Meaning:</span>
+</div>
+
+<div class="kanji-meaning">
+    <span>{{kanji_meaning}}</span>
+</div>
+{{/kanji_meaning}}
+
+<div class="jisho">
+
+    {{#kanjis}}
+    <a href="https://jisho.org/search/{{kanjis}}">Jisho<a/>
+        {{/kanjis}}
+
+        {{^kanjis}}
+        <a href="https://jisho.org/search/{{japanese_kana}}">Jisho<a/>
+            {{/kanjis}}
+
+</div>
+
+<div class="furigana-toggle">
+    <div class="vertical-center">
+        <a href="javascript:void(0)" onclick="toggleFurigana();">
+            <ruby>漢<rt clas="visible">かん</rt>字<rt clas="visible">じ</rt></ruby>
+        </a>
+    </div>
+</div>
+
+<script>
+    function toggleFurigana() {
+        let items = document.getElementsByTagName("rt");
+        for (let item of items) {
+            console.log(item.style.visibility=item.style.visibility);
+            item.style.visibility=item.style.visibility === "hidden" ? "visible" : "hidden";
+        }
+
+        items = document.getElementsByClassName("furigana");
+        for (let item of items) {
+            item.style.visibility=item.style.visibility === "hidden" ? "visible" : "hidden";
+        }
+    }
+</script>

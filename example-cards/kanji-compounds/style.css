@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+.card {
+    font-family: Noto Sans JP;
+    font-size: 50px;
+    text-align: center;
+    color: black;
+    background-color: white;
+    overflow-wrap: break-word;
+}
+
+.card-type {
+    font-size: 20px;
+    color: #777;
+}
+
+.card-type .card-type-symbol {
+}
+
+.card-type .card-type-hint {
+    font-size: 12px;
+}
+
+.compound-container div {
+    height: 110px;
+    width: 100%;
+    margin: 10px 0 20px 0;
+    box-sizing:border-box;
+    padding: 10px;
+    text-align:center;
+}
+
+.compound-container {
+    width:auto;
+    margin: 0 10px;
+}
+
+.compound {
+    position: relative;
+}
+
+.compound span {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.compound span ruby rt {
+    color: #72B9FF;
+}
+
+.translation {
+    margin-top: 30px;
+    font-size: 20px;
+}
+
+.additional-information {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #777
+}
+
+.supplemental-information {
+    margin-top: 10px;
+    font-size: 8px;
+    color: #777;
+}
+
+.jlpt-level {
+    padding-left: 5px;
+    font-weight: bold
+}
+
+.jisho {
+    margin-top: 90px;
+    font-size: 20px;
+}
+
+.jisho a {
+    color: #56d926;
+}

@@ -1,0 +1,40 @@
+{{#kanjis}}
+<div class="furigana hidden">
+    <span>{{japanese_kana}}</span>
+</div>
+<div class="japanese">
+    <span>{{kanjis}}</span>
+</div>
+{{/kanjis}}
+
+{{^kanjis}}
+<div class="japanese">
+    <span>{{japanese_kana}}</span>
+</div>
+{{/kanjis}}
+
+<div class="sound">
+    <span>{{sound}}</span>
+</div>
+
+<div class="furigana-toggle">
+    <div class="vertical-center">
+        <a href="javascript:void(0)" onclick="toggleFurigana();">
+            <ruby>漢<rt class="hidden">かん</rt>字<rt class="hidden">じ</rt></ruby>
+        </a>
+    </div>
+</div>
+
+<script>
+    function toggleFurigana() {
+        let items = document.getElementsByTagName("rt");
+        for (let item of items) {
+            item.style.visibility=item.style.visibility === "visible" ? "hidden" : "visible";
+        }
+
+        items = document.getElementsByClassName("furigana");
+        for (let item of items) {
+            item.style.visibility=item.style.visibility === "visible" ? "hidden" : "visible";
+        }
+    }
+</script>

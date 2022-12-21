@@ -1,0 +1,35 @@
+{{FrontSide}}
+
+<div class="additional-information">
+    {{additional_information}}
+</div>
+
+<div class="section-header">
+    <span>Translation:</span>
+</div>
+
+<div class="english">
+    <span>{{english}}</span>
+</div>
+
+{{#kanji_meaning}}
+<div class="section-header spacer">
+    <span>Kanji Meaning:</span>
+</div>
+
+<div class="kanji-meaning">
+    <span>{{kanji_meaning}}</span>
+</div>
+{{/kanji_meaning}}
+
+<div class="jisho">
+
+    {{#kanjis}}
+    <a href="https://jisho.org/search/{{kanjis}}">Jisho<a/>
+        {{/kanjis}}
+
+        {{^kanjis}}
+        <a href="https://jisho.org/search/{{japanese_kana}}">Jisho<a/>
+            {{/kanjis}}
+
+</div>

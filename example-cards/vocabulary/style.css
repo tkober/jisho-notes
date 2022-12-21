@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+.card {
+    font-family: Noto Sans JP;
+    font-size: 25px;
+    text-align: center;
+    color: black;
+    background-color: white;
+    overflow-wrap: break-word;
+}
+
+.card-type {
+    font-size: 20px;
+    color: #777;
+}
+
+.card-type .card-type-symbol {
+}
+
+.card-type .card-type-hint {
+    font-size: 12px;
+}
+
+.english div {
+    height: 110px;
+    width: 100%;
+    margin: 10px 0 20px 0;
+    box-sizing:border-box;
+    padding: 10px;
+    text-align:center;
+}
+
+.japanese span ruby rt {
+    color: #72B9FF;
+}
+
+.answer {
+    margin-top: 30px;
+}
+
+.additional-information {
+    margin-top: 10px;
+    font-size: 10px;
+    color: #777;
+    font-weight: bold;
+}
+
+.supplemental-information {
+    margin-top: 10px;
+    font-size: 8px;
+    color: #777;
+}
+
+.jisho {
+    margin-top: 90px;
+    font-size: 20px;
+}
+
+.jisho a {
+    color: #56d926;
+}
+
+ruby rt {
+    visibility: hidden;
+}
+
+.furigana-toggle {
+    text-align: center;
+    background-color: #72B9FF;
+    position: fixed;
+    right: 0px;
+    bottom: 100px;
+    width: 100px;
+    height: 60px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    opacity: 0.8;
+}
+
+.furigana-toggle a {
+    font-size: 25px;
+    color: #FFF;
+}
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

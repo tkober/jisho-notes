@@ -4,16 +4,6 @@
 
 ## Note Types
 
-### Vocabulary
-
-```
-1. japanese (with furigana annotations)
-2. english
-3. type
-4. jlpt-level
-5. supplemental-information
-```
-
 ### Kanji
 
 ```
@@ -80,4 +70,14 @@
 12. past-short-affirmative
 13. past-short-negative
 14. te-form
+```
+
+### Vocabulary
+
+```
+1. japanese (with furigana annotations)
+2. english
+3. type
+4. jlpt-level
+5. supplemental-information
 ```

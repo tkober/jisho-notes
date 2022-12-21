@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<div class="card-type">
+    <div class="card-type-symbol">
+        <span class="material-symbols-outlined">brush</span>
+    </div>
+    <div class="card-type-hint">
+        <span>Writing</span>
+    </div>
+</div>
+
+<div class="meaning mb-1">
+    {{meaning}}
+</div>
+
+<div class="writing-container">
+    <div class="genkou-youshi square">
+        <div class="horizontal guideline"></div>
+        <div class="vertical guideline"></div>
+    </div>
+    <div class="flex-br tablet"></div>
+    <div class="kanji-strokes square" onClick="toggleFont()" id="solution">
+        {{kanji}}
+    </div>
+</div>
+
+<div class="additional-information mb-2">
+    JLPT Level <span class="jlpt-level">{{jlpt-level}}</span>
+</div>
+
+<div class="stroke-order-section">
+    <div class="stroke-order-title">Stroke Order</div>
+    <div class="stroke_order_diagram--outer_container">
+        {{stroke-order}}
+    </div>
+</div>
+
+<div class="jisho">
+    <a href="https://jisho.org/search/{{kanji:kanji}}%20%23kanji">Jisho<a/>
+</div>
+
+<script>
+
+    function toggleFont() {
+        const element = document.getElementById('solution');
+        if (element.classList.contains('stroke-order')) {
+            element.classList.remove('stroke-order');
+        } else {
+            element.classList.add('stroke-order');
+        }
+    }
+
+</script>

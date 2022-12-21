@@ -1,0 +1,30 @@
+{{FrontSide}}
+
+<div class="japanese answer">
+    <span>{{furigana:japanese}}</span>
+</div>
+
+<div class="additional-information">
+    {{additiona-information}}
+</div>
+
+<div class="jisho">
+    <a href="https://jisho.org/search/{{kanji:japanese}}">Jisho<a/>
+</div>
+
+<div class="furigana-toggle">
+    <div class="vertical-center">
+        <a href="javascript:void(0)" onclick="toggleFurigana();">
+            <ruby>漢<rt>かん</rt>字<rt>じ</rt></ruby>
+        </a>
+    </div>
+</div>
+
+<script>
+    function toggleFurigana() {
+        const items = document.getElementsByTagName("rt");
+        for (let item of items) {
+            item.style.visibility=item.style.visibility === "visible" ? "hidden" : "visible";
+        }
+    }
+</script>
