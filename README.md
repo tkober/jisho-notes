@@ -1,5 +1,7 @@
 # Jisho Notes
 
+[![Watch Demo](doc/youtube_preview.png)](https://youtu.be/_dQ6NKb1W2c)
+
 ## Note Types
 
 ### Vocabulary
