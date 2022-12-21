@@ -56,7 +56,7 @@
 20. causative-affirmative
 21. causative-negative
 22. causative-passive-affirmative
-23. causative-passive
+23. causative-passive-negative
 24. imperative-affirmative
 25. imperative-negative
 ```
