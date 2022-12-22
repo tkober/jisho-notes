@@ -15,7 +15,7 @@
 4. stroke-order   
 ```
 
-![kanji_writing.jpg](doc%2Fscreenshots%2Fkanji_writing.jpg)
+<img src="doc%2Fscreenshots%2Fkanji_writing.jpg" alt="drawing" height="700"/>
 
 ### Kanji Reading
 
@@ -29,7 +29,7 @@
 5. supplemental-information
 ```
 
-![kanji_readings.jpg](doc%2Fscreenshots%2Fkanji_readings.jpg)
+<img src="doc%2Fscreenshots%2Fkanji_readings.jpg" alt="drawing" height="700"/>
 
 ### Verb Conjugation
 
@@ -63,7 +63,7 @@
 25. imperative-negative
 ```
 
-![verb_conjugations.jpg](doc%2Fscreenshots%2Fverb_conjugations.jpg)
+<img src="doc%2Fscreenshots%2Fverb_conjugations.jpg" alt="drawing" height="700"/>
 
 ### Adjective Conjugation
 
@@ -86,7 +86,7 @@
 14. te-form
 ```
 
-![adjective_conjugation.jpg](doc%2Fscreenshots%2Fadjective_conjugation.jpg)
+<img src="doc%2Fscreenshots%2Fadjective_conjugation.jpg" alt="drawing" height="700"/>
 
 ### Vocabulary
 
@@ -99,4 +99,5 @@
 4. jlpt-level
 5. supplemental-information
 ```
-![vocabulary.jpg](doc%2Fscreenshots%2Fvocabulary.jpg)
+
+<img src="doc%2Fscreenshots%2Fvocabulary.jpg" alt="drawing" height="700"/>
