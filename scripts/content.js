@@ -124,11 +124,6 @@ function createWordNote(noteType, tagsElement, meaningElement) {
     // 5. supplemental-information
     const supplementalInformation = getSupplementalInformation();
 
-    if (type.includes('Na-adjective')) {
-        japanese += ' (な)';
-    }
-
-    const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
     let conjugations = [];
     if (NOTE_TYPE_CONJUGATION === noteType) {
         // 6... Conjugations
@@ -136,11 +131,21 @@ function createWordNote(noteType, tagsElement, meaningElement) {
          conjugations = conjugationItems.join('\t');
         if (type.includes('verb')) {
             noteType = 'verb-'+ noteType;
+            if (type.toLowerCase().includes('suru verb') && !japanese.endsWith('する')) {
+                japanese += 'する';
+            }
+            if (type.toLowerCase().includes('kuru verb') && !japanese.endsWith('くる')) {
+                japanese += 'くる';
+            }
         } else if (type.includes('adjective')) {
             noteType = 'adjective-'+ noteType;
+            if (type.toLowerCase().includes('na-adjective')) {
+                japanese += ' (な)';
+            }
         }
     }
 
+    const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
     const csv = [basicFields, conjugations].join('\t').trimEnd();
     const url = `${location.href}#:~:text=${english}`
     const summary = `${representation.withoutFurigana} - ${english}`;
@@ -247,7 +252,7 @@ function gatherConjugations(type) {
             result.push(negativeText);
         }
 
-        if (type.includes('I-adjective')) {
+        if (type.toLowerCase().includes('i-adjective')) {
             result = [
                 // non-past-affirmative
                 `${result[0]}です`,
@@ -275,33 +280,147 @@ function gatherConjugations(type) {
         }, 500);
         return result;
     } else {
-        if (type.includes('Na-adjective')) {
-            const representationElement = document.getElementsByClassName('concept_light-representation').item(0);
-            const japaneseElement = representationElement.getElementsByClassName('text').item(0);
-            const adjective = japaneseElement.textContent.trim();
-            return [
-                // non-past-affirmative
-                `${adjective}です`,
-                // non-past-negative
-                `${adjective}じゃないです`,
-                // non-past-short-affirmative
-                `${adjective}だ`,
-                // non-past-short-negative
-                `${adjective}じゃない`,
-                // past-affirmative
-                `${adjective}でした`,
-                // past-negative
-                `${adjective}じゃなかったです`,
-                // past-short-affirmative
-                `${adjective}だった`,
-                // past-short-negative
-                `${adjective}じゃなかった`,
-                // te-form
-                `${adjective}で`
-            ];
+        const representationElement = document.getElementsByClassName('concept_light-representation').item(0);
+        const japaneseElement = representationElement.getElementsByClassName('text').item(0);
+        const japanese = japaneseElement.textContent.trim();
+
+        if (type.toLowerCase().includes('na-adjective')) {
+            return naAdjectiveConjugation(japanese);
         }
+
+        if (type.toLowerCase().includes('suru verb')) {
+            return suruVerbConjugation(japanese);
+        }
+
+        if (type.toLowerCase().includes('kuru verb')) {
+            return kuruVerbConjugation(japanese);
+        }
+
         return [];
     }
+}
+
+function suruVerbConjugation(japanese) {
+    let checked = japanese;
+    if (japanese.endsWith('する')) {
+        checked = japanese.slice(0, -2);
+    }
+
+    return [
+        // non-past-affirmative
+        `${japanese}する`,
+        // non-past-negative
+        `${japanese}しない`,
+        // non-past-polite-affirmative
+        `${japanese}します`,
+        // non-past-polite-negative
+        `${japanese}しません`,
+        // past-affirmative
+        `${japanese}した`,
+        // past-negative
+        `${japanese}しなかった`,
+        // past-polite-affirmative
+        `${japanese}しました`,
+        // past-polite-negative
+        `${japanese}しませんでした`,
+        // te-form-affirmative
+        `${japanese}して`,
+        // te-form-negative
+        `${japanese}しなくて`,
+        // potential-affirmative
+        `${japanese}できる`,
+        // potential-negative
+        `${japanese}できない`,
+        // passive-affirmative
+        `${japanese}される`,
+        // passive-negative
+        `${japanese}されない`,
+        // causative-affirmative
+        `${japanese}させる`,
+        // causative-negative
+        `${japanese}させない`,
+        // causative-passive-affirmative
+        `${japanese}させられる`,
+        // causative-passive-negative
+        `${japanese}させられない`,
+        // imperative-affirmative
+        `${japanese}しる`,
+        // imperative-negative
+        `${japanese}するな`,
+    ];
+}
+
+function kuruVerbConjugation(japanese) {
+    let checked = japanese;
+    if (japanese.endsWith('する')) {
+        checked = japanese.slice(0, -2);
+    }
+
+    return [
+        // non-past-affirmative
+        `${japanese}くる`,
+        // non-past-negative
+        `${japanese}こない`,
+        // non-past-polite-affirmative
+        `${japanese}きます`,
+        // non-past-polite-negative
+        `${japanese}きません`,
+        // past-affirmative
+        `${japanese}きた`,
+        // past-negative
+        `${japanese}こなかった`,
+        // past-polite-affirmative
+        `${japanese}きました`,
+        // past-polite-negative
+        `${japanese}きませんでした`,
+        // te-form-affirmative
+        `${japanese}きて`,
+        // te-form-negative
+        `${japanese}こなくて`,
+        // potential-affirmative
+        `${japanese}こられる`,
+        // potential-negative
+        `${japanese}こられない`,
+        // passive-affirmative
+        `${japanese}こられる`,
+        // passive-negative
+        `${japanese}こられない`,
+        // causative-affirmative
+        `${japanese}こさせる`,
+        // causative-negative
+        `${japanese}こさせない`,
+        // causative-passive-affirmative
+        `${japanese}こさせられる`,
+        // causative-passive-negative
+        `${japanese}こさせられない`,
+        // imperative-affirmative
+        `${japanese}こい`,
+        // imperative-negative
+        `${japanese}くるな`,
+    ];
+}
+
+function naAdjectiveConjugation(japanese) {
+    return [
+        // non-past-affirmative
+        `${japanese}です`,
+        // non-past-negative
+        `${japanese}じゃないです`,
+        // non-past-short-affirmative
+        `${japanese}だ`,
+        // non-past-short-negative
+        `${japanese}じゃない`,
+        // past-affirmative
+        `${japanese}でした`,
+        // past-negative
+        `${japanese}じゃなかったです`,
+        // past-short-affirmative
+        `${japanese}だった`,
+        // past-short-negative
+        `${japanese}じゃなかった`,
+        // te-form
+        `${japanese}で`
+    ];
 }
 
 function closeConjugationsModal() {
