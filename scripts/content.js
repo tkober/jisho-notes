@@ -199,7 +199,10 @@ function gatherJapanese() {
 
     const result = [];
     for (let i = 0; i < kanjis.length; i++) {
-        let furigana = furiganaSpanElements.item(i).textContent.trim();
+        let furigana = '';
+        if (i < furiganaSpanElements.length) {
+            furigana = furiganaSpanElements.item(i).textContent.trim();
+        }
         furigana = furigana.length === 0 ? ' ' : furigana;
         const kanji = kanjis[i]
 
