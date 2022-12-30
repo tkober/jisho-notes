@@ -146,7 +146,7 @@ function createWordNote(noteType, tagsElement, meaningElement) {
     }
 
     const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
-    const csv = [basicFields, conjugations].join('\t').trimEnd();
+    const csv = [basicFields, conjugations].join('\t');
     const url = `${location.href}#:~:text=${english}`
     const summary = `${representation.withoutFurigana} - ${english}`;
     saveNote(noteType, summary, url, csv)
