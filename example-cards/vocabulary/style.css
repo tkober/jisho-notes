@@ -7,7 +7,7 @@ a:active { text-decoration: none; }
 
 .card {
     font-family: Noto Sans JP;
-    font-size: 25px;
+    font-size: 35px;
     text-align: center;
     color: black;
     background-color: white;
@@ -17,6 +17,7 @@ a:active { text-decoration: none; }
 .card-type {
     font-size: 20px;
     color: #777;
+    margin-bottom: 10px;
 }
 
 .card-type .card-type-symbol {
