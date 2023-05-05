@@ -132,3 +132,37 @@ ruby rt {
     align-items: center;
     height: 100%;
 }
+
+.show-button {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    color: #72B9FF;
+}
+
+.conjugation-hidden {
+    position: relative;
+}
+
+.conjugation-hidden .solution {
+    visibility: hidden;
+}
+
+.conjugation-hidden .show-button {
+    visibility: visible;
+}
+
+.show-all-button {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.show-all-button a {
+    color: #fff;
+    background-color: #bababa;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+}

@@ -1,0 +1,162 @@
+{{FrontSide}}
+
+<div class="counters">
+    <div class="usage">
+        {{usage}}
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="1">
+                <a href="javascript:void(0)" onclick="showReading('1');">
+                    {{furigana:1}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="2">
+                <a href="javascript:void(0)" onclick="showReading('2');">
+                    {{furigana:2}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="3">
+                <a href="javascript:void(0)" onclick="showReading('3');">
+                    {{furigana:3}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="4">
+                <a href="javascript:void(0)" onclick="showReading('4');">
+                    {{furigana:4}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="5">
+                <a href="javascript:void(0)" onclick="showReading('5');">
+                    {{furigana:5}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="6">
+                <a href="javascript:void(0)" onclick="showReading('6');">
+                    {{furigana:6}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="7">
+                <a href="javascript:void(0)" onclick="showReading('7');">
+                    {{furigana:7}}
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="8">
+                <a href="javascript:void(0)" onclick="showReading('8');">
+                    {{furigana:8}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="9">
+                <a href="javascript:void(0)" onclick="showReading('9');">
+                    {{furigana:9}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="10">
+                <a href="javascript:void(0)" onclick="showReading('10');">
+                    {{furigana:10}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="counter">
+        <div class="furigana">
+
+            <div class="reading-hidden" id="how-many">
+                <a href="javascript:void(0)" onclick="showReading('how-many');">
+                    {{furigana:how-many}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="furigana-toggle" id="show-all-button">
+        <div class="vertical-center">
+            <a href="javascript:void(0)" onclick="showAllReadings();">
+                <span class="material-symbols-outlined">visibility</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function showReading(id) {
+        document.getElementById(id).classList.remove('reading-hidden');
+        document.getElementById(id).classList.add('counter-reading');
+    }
+
+    function showAllReadings() {
+        showReading('1');
+        showReading('2');
+        showReading('3');
+        showReading('4');
+        showReading('5');
+        showReading('6');
+        showReading('7');
+        showReading('8');
+        showReading('9');
+        showReading('10');
+        showReading('how-many');
+
+        document.getElementById('show-all-button').style.visibility = 'hidden';
+    }
+</script>

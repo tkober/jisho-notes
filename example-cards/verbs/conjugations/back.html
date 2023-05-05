@@ -1,62 +1,182 @@
 {{FrontSide}}
 
-<div class="type answer">
-    <span>{{type}}</span>
-</div>
+<div class="answer" id="answer">
+    <div class="type answer">
+        <span>{{type}}</span>
+    </div>
 
-<div class="additional-information">
-    JLPT Level <span class="jlpt-level">{{jlpt-level}}</span>
-</div>
+    <div class="additional-information">
+        JLPT Level <span class="jlpt-level">{{jlpt-level}}</span>
+    </div>
 
-<div class="supplemental-information">
-    {{supplemental-information}}
-</div>
+    <div class="supplemental-information">
+        {{supplemental-information}}
+    </div>
 
-<div class="inflections-header cols-2">
-    <div>Affirmative</div>
-    <div>Negative</div>
-</div>
+    <div class="inflections-header cols-2">
+        <div>Affirmative</div>
+        <div>Negative</div>
+    </div>
 
-<div class="inflection">
-    <div class="inflection-name">Non-past (short)</div>
-    <div class="cols-2 furigana">
-        <div>{{furigana:non-past-affirmative}}</div>
-        <div>{{furigana:non-past-negative}}</div>
+    <div class="show-all-button" id="show-all-button">
+        <a onclick="showAllConjugations()">Show all</a>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Non-past (short)</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:non-past-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:non-past-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Past (short)</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:past-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:past-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Non-past, polite</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:non-past-polite-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:non-past-polite-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Past, polite</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:past-polite-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:past-polite-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Te-form</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:te-form-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:te-form-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Potential</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:potential-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:potential-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Passive</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:passive-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:passive-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Causative</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:causative-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:causative-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Causative Passive</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:causative-passive-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:causative-passive-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inflection">
+        <div class="inflection-name">Imperative</div>
+        <div class="cols-2 furigana">
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:imperative-affirmative}}</div>
+            </div>
+            <div class="conjugation-hidden">
+                <a class="show-button" onclick="showConjugation(event)">show</a>
+                <div class="solution">{{furigana:imperative-negative}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jisho">
+        <a href="https://jisho.org/search/{{kanji:japanese}}">Jisho</a>
     </div>
 </div>
 
-<div class="inflection">
-    <div class="inflection-name">Non-past, polite</div>
-    <div class="cols-2 furigana">
-        <div>{{furigana:non-past-polite-affirmative}}</div>
-        <div>{{furigana:non-past-polite-negative}}</div>
-    </div>
-</div>
+<script>
+    function showConjugation(e) {
+        e.srcElement.parentElement.classList.remove('conjugation-hidden');
+    }
 
-<div class="inflection">
-    <div class="inflection-name">Past (short)</div>
-    <div class="cols-2 furigana">
-        <div>{{furigana:past-affirmative}}</div>
-        <div>{{furigana:past-negative}}</div>
-    </div>
-</div>
-
-<div class="inflection">
-    <div class="inflection-name">Past, polite</div>
-    <div class="cols-2 furigana">
-        <div>{{furigana:past-polite-affirmative}}</div>
-        <div>{{furigana:past-polite-negative}}</div>
-    </div>
-</div>
-
-<div class="inflection">
-    <div class="inflection-name">Te-form</div>
-    <div class="cols-2 furigana">
-        <div>{{furigana:te-form-affirmative}}</div>
-        <div></div>
-    </div>
-</div>
-
-<div class="jisho">
-    <a href="https://jisho.org/search/{{kanji:japanese}}">Jisho<a/>
-</div>
+    function showAllConjugations() {
+        const elements = document.querySelectorAll('.conjugation-hidden');
+        elements.forEach((element) => {
+            element.classList.remove('conjugation-hidden');
+        });
+        document.getElementById('answer').removeChild(document.getElementById('show-all-button'));
+    }
+</script>
