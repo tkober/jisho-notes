@@ -28,6 +28,7 @@
       "css": ["styles/buttons.css", "styles/snackbar.css"],
       "matches": [
         "https://jisho.org/word/*",
+        "https://jisho.org/search/*",
         "https://jisho.org/search/*%20%23kanji"
       ]
     }

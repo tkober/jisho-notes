@@ -3,15 +3,12 @@ const NOTE_TYPE_VOCABULARY = 'vocabulary';
 const NOTE_TYPE_CONJUGATION = 'conjugation';
 const NOTE_TYPE_KANJI_READING = 'kanji-reading';
 
-if (location.href.startsWith('https://jisho.org/word/')) {
-    addSnackbar();
-    addWordNoteButtons();
-
-}
-
 if (location.href.startsWith('https://jisho.org/search/') && location.href.endsWith('%20%23kanji')) {
     addSnackbar();
     addKanjiNoteButton()
+} else if (location.href.startsWith('https://jisho.org/word/') || location.href.startsWith('https://jisho.org/search/')) {
+    addSnackbar();
+    addNoteButtonsToAllConcepts();
 }
 
 function addSnackbar() {
@@ -25,23 +22,38 @@ function showSnackbar(message) {
     snackbar.textContent = message;
     snackbar.className = "show";
     setTimeout(
-        () => { snackbar.className = snackbar.className.replace("show", ""); },
+        () => {
+            snackbar.className = snackbar.className.replace("show", "");
+        },
         3000
     );
 }
 
-function addWordNoteButtons() {
-    const meaningsWrapper = document.getElementsByClassName('meanings-wrapper').item(0);
 
+function addNoteButtonsToAllConcepts() {
+    const conceptElements = document.getElementsByClassName('concept_light');
+
+    for (let conceptElement of conceptElements) {
+        addWordNoteButtonsToConcept(conceptElement)
+    }
+}
+
+function addWordNoteButtonsToConcept(conceptElement) {
+    const meaningsWrapper = conceptElement.getElementsByClassName('meanings-wrapper').item(0);
     if (meaningsWrapper) {
         childNodes = meaningsWrapper.childNodes
         for (let i = 0; i < childNodes.length; i += 2) {
             const tagsElement = childNodes.item(i);
-            const meaningWrapperElement = childNodes.item(i+1);
+            const meaningWrapperElement = childNodes.item(i + 1);
             const meaningElement = meaningWrapperElement.getElementsByClassName('meaning-meaning').item(0);
+
+            if (isOtherForms(tagsElement) || isWikipediaDefinition(tagsElement)) {
+                continue;
+            }
 
             if (meaningElement) {
                 const button = WordCardDropdown(
+                    conceptElement,
                     tagsElement,
                     meaningElement
                 );
@@ -67,18 +79,35 @@ function addKanjiNoteButton() {
     }
 }
 
-function WordCardDropdown(tagsElement, meaningElement) {
-    return Dropdown([
-        DropdownAction('Vocabulary Note', (() => { createWordNote(NOTE_TYPE_VOCABULARY, tagsElement, meaningElement) })),
-        DropdownAction('Kanji Compound Note', (() => { createWordNote(NOTE_TYPE_KANJI_READING, tagsElement, meaningElement) })),
-        DropdownAction('Conjugation Note', (() => { createWordNote(NOTE_TYPE_CONJUGATION, tagsElement, meaningElement) }))
-    ]);
+function WordCardDropdown(conceptElement, tagsElement, meaningElement) {
+    let actions = [
+        DropdownAction('Vocabulary Note', (() => {
+            createWordNote(NOTE_TYPE_VOCABULARY, conceptElement, tagsElement, meaningElement)
+        })),
+        DropdownAction('Kanji Compound Note', (() => {
+            createWordNote(NOTE_TYPE_KANJI_READING, conceptElement, tagsElement, meaningElement)
+        }))
+    ]
+
+    if (isConjugation(tagsElement)) {
+        actions.push(
+            DropdownAction('Conjugation Note', (() => {
+                createWordNote(NOTE_TYPE_CONJUGATION, conceptElement, tagsElement, meaningElement)
+            }))
+        );
+    }
+
+    return Dropdown(actions);
 }
 
 function KanjiCardDropdown(kanjiTextContent, meaningsTextContent) {
     return Dropdown([
-        DropdownAction('Kanji Note', (() => { createKanjiNote(kanjiTextContent, meaningsTextContent) })),
-        DropdownAction('Copy Stroke Order', (() => { copyStrokeOrderDiagramToClipboard() }))
+        DropdownAction('Kanji Note', (() => {
+            createKanjiNote(kanjiTextContent, meaningsTextContent)
+        })),
+        DropdownAction('Copy Stroke Order', (() => {
+            copyStrokeOrderDiagramToClipboard()
+        }))
     ]);
 }
 
@@ -111,8 +140,8 @@ function DropdownAction(title, onClick) {
     return result;
 }
 
-function createWordNote(noteType, tagsElement, meaningElement) {
-    const representation = gatherJapanese();
+function createWordNote(noteType, conceptElement, tagsElement, meaningElement) {
+    const representation = gatherJapanese(conceptElement);
     // 1. japanese
     let japanese = representation.withFurigana;
     // 2. english
@@ -128,9 +157,9 @@ function createWordNote(noteType, tagsElement, meaningElement) {
     if (NOTE_TYPE_CONJUGATION === noteType) {
         // 6... Conjugations
         const conjugationItems = gatherConjugations(type);
-         conjugations = conjugationItems.join('\t');
+        conjugations = conjugationItems.join('\t');
         if (type.includes('verb')) {
-            noteType = 'verb-'+ noteType;
+            noteType = 'verb-' + noteType;
             if (type.toLowerCase().includes('suru verb') && !japanese.endsWith('する')) {
                 japanese += 'する';
             }
@@ -138,7 +167,7 @@ function createWordNote(noteType, tagsElement, meaningElement) {
                 japanese += 'くる';
             }
         } else if (type.includes('adjective')) {
-            noteType = 'adjective-'+ noteType;
+            noteType = 'adjective-' + noteType;
             if (type.toLowerCase().includes('na-adjective')) {
                 japanese += ' (な)';
             }
@@ -171,7 +200,7 @@ function trimString(string, limit) {
 }
 
 function saveNote(noteType, summary, url, csv) {
-    chrome.storage.local.get(["ankiNotes"], function(result) {
+    chrome.storage.local.get(["ankiNotes"], function (result) {
 
         let notes = [];
         if ('ankiNotes' in result) {
@@ -184,14 +213,14 @@ function saveNote(noteType, summary, url, csv) {
             'csv': csv
         });
 
-        chrome.storage.local.set({ "ankiNotes": notes }, function() {
+        chrome.storage.local.set({"ankiNotes": notes}, function () {
             showSnackbar('Your note has been saved!');
         });
     });
 }
 
-function gatherJapanese() {
-    const representationElement = document.getElementsByClassName('concept_light-representation').item(0);
+function gatherJapanese(conceptElement) {
+    const representationElement = conceptElement.getElementsByClassName('concept_light-representation').item(0);
     const furiganaElement = representationElement.getElementsByClassName('furigana').item(0);
     const furiganaSpanElements = furiganaElement.getElementsByTagName('span');
     const kanjiElement = representationElement.getElementsByClassName('text').item(0);
@@ -210,8 +239,8 @@ function gatherJapanese() {
     }
 
     const withFurigana = result.join('');
-    const withoutFurigana =  kanjis.join('');
-    return { withFurigana, withoutFurigana };
+    const withoutFurigana = kanjis.join('');
+    return {withFurigana, withoutFurigana};
 }
 
 function getJlptLevel() {
@@ -476,4 +505,16 @@ function copyStrokeOrderDiagramToClipboard() {
     navigator.clipboard.writeText(strokeOrder).then(() => {
         showSnackbar('The stroke order SVG was copied to clipboard!');
     });
+}
+
+function isConjugation(tagsElement) {
+    return tagsElement.textContent.toLowerCase().includes('adjective') || tagsElement.textContent.toLowerCase().includes('verb');
+}
+
+function isOtherForms(tagsElement) {
+    return tagsElement.textContent.trim().toLowerCase() === 'other forms';
+}
+
+function isWikipediaDefinition(tagsElement) {
+    return tagsElement.textContent.trim().toLowerCase() === 'wikipedia definition';
 }
