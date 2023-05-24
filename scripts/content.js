@@ -163,11 +163,11 @@ function createWordNote(noteType, conceptElement, tagsElement, meaningElement, m
     // 5. supplemental-information
     const supplementalInformation = getSupplementalInformation(meaningsWrapper);
 
-    let conjugations = [];
+    let additionalFields = [];
     if (NOTE_TYPE_CONJUGATION === noteType) {
         // 6... Conjugations
         const conjugationItems = gatherConjugations(type, conceptElement);
-        conjugations = conjugationItems.join('\t');
+        additionalFields = conjugationItems.join('\t');
         if (type.includes('verb')) {
             noteType = 'verb-' + noteType;
             if (type.toLowerCase().includes('suru verb') && !japanese.endsWith('する')) {
@@ -184,8 +184,19 @@ function createWordNote(noteType, conceptElement, tagsElement, meaningElement, m
         }
     }
 
+
+    if (NOTE_TYPE_KEIGO) {
+        if (supplementalInformation.toLowerCase().includes('sonkeigo')) {
+            additionalFields = ['Sonkeigo', 'Honorific/Respectful'].join('\t');
+        }
+        if (supplementalInformation.toLowerCase().includes('kenjougo')) {
+            additionalFields = ['Kenjougo', 'Humble'].join('\t');
+        }
+    }
+
     const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
-    const csv = [basicFields, conjugations].join('\t');
+    const csv = [basicFields, additionalFields].join('\t');
+
     const url = `${location.href}#:~:text=${english}`
     const summary = `${representation.withoutFurigana} - ${english}`;
     saveNote(noteType, summary, url, csv)
