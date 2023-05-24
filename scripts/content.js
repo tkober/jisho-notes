@@ -2,6 +2,7 @@ const NOTE_TYPE_KANJI = 'kanji';
 const NOTE_TYPE_VOCABULARY = 'vocabulary';
 const NOTE_TYPE_CONJUGATION = 'conjugation';
 const NOTE_TYPE_KANJI_READING = 'kanji-reading';
+const NOTE_TYPE_KEIGO = 'keigo';
 
 if (location.href.startsWith('https://jisho.org/search/') && location.href.endsWith('%20%23kanji')) {
     addSnackbar();
@@ -55,7 +56,8 @@ function addWordNoteButtonsToConcept(conceptElement) {
                 const button = WordCardDropdown(
                     conceptElement,
                     tagsElement,
-                    meaningElement
+                    meaningElement,
+                    meaningWrapperElement
                 );
                 meaningElement.insertAdjacentElement('beforebegin', button);
                 meaningElement.parentElement.childNodes.forEach(child => {
@@ -79,20 +81,28 @@ function addKanjiNoteButton() {
     }
 }
 
-function WordCardDropdown(conceptElement, tagsElement, meaningElement) {
+function WordCardDropdown(conceptElement, tagsElement, meaningElement, meaningsWrapper) {
     let actions = [
         DropdownAction('Vocabulary Note', (() => {
-            createWordNote(NOTE_TYPE_VOCABULARY, conceptElement, tagsElement, meaningElement)
+            createWordNote(NOTE_TYPE_VOCABULARY, conceptElement, tagsElement, meaningElement, meaningsWrapper)
         })),
         DropdownAction('Kanji Compound Note', (() => {
-            createWordNote(NOTE_TYPE_KANJI_READING, conceptElement, tagsElement, meaningElement)
+            createWordNote(NOTE_TYPE_KANJI_READING, conceptElement, tagsElement, meaningElement, meaningsWrapper)
         }))
     ]
 
     if (isConjugation(tagsElement)) {
         actions.push(
             DropdownAction('Conjugation Note', (() => {
-                createWordNote(NOTE_TYPE_CONJUGATION, conceptElement, tagsElement, meaningElement)
+                createWordNote(NOTE_TYPE_CONJUGATION, conceptElement, tagsElement, meaningElement, meaningsWrapper)
+            }))
+        );
+    }
+
+    if (isKeigo(meaningsWrapper)) {
+        actions.push(
+            DropdownAction('Keigo Note', (() => {
+                createWordNote(NOTE_TYPE_KEIGO, conceptElement, tagsElement, meaningElement, meaningsWrapper)
             }))
         );
     }
@@ -140,7 +150,7 @@ function DropdownAction(title, onClick) {
     return result;
 }
 
-function createWordNote(noteType, conceptElement, tagsElement, meaningElement) {
+function createWordNote(noteType, conceptElement, tagsElement, meaningElement, meaningsWrapper) {
     const representation = gatherJapanese(conceptElement);
     // 1. japanese
     let japanese = representation.withFurigana;
@@ -149,14 +159,14 @@ function createWordNote(noteType, conceptElement, tagsElement, meaningElement) {
     // 3. type
     const type = tagsElement.textContent.trim();
     // 4. jlpt-level
-    const jlptLevel = getJlptLevel();
+    const jlptLevel = ''
     // 5. supplemental-information
-    const supplementalInformation = getSupplementalInformation();
+    const supplementalInformation = getSupplementalInformation(meaningsWrapper);
 
     let conjugations = [];
     if (NOTE_TYPE_CONJUGATION === noteType) {
         // 6... Conjugations
-        const conjugationItems = gatherConjugations(type);
+        const conjugationItems = gatherConjugations(type, conceptElement);
         conjugations = conjugationItems.join('\t');
         if (type.includes('verb')) {
             noteType = 'verb-' + noteType;
@@ -179,24 +189,6 @@ function createWordNote(noteType, conceptElement, tagsElement, meaningElement) {
     const url = `${location.href}#:~:text=${english}`
     const summary = `${representation.withoutFurigana} - ${english}`;
     saveNote(noteType, summary, url, csv)
-}
-
-function noteTypeFromTags(tags) {
-    if (tags.toLocaleLowerCase().includes('adjective')) {
-        'adjective'
-    }
-
-    if (tags.toLocaleLowerCase().includes('verb')) {
-        'verb'
-    }
-
-    return 'word';
-}
-
-function trimString(string, limit) {
-    return string.length > limit ?
-        string.substring(0, limit - 3) + "..." :
-        string;
 }
 
 function saveNote(noteType, summary, url, csv) {
@@ -243,28 +235,16 @@ function gatherJapanese(conceptElement) {
     return {withFurigana, withoutFurigana};
 }
 
-function getJlptLevel() {
-    const conceptTagElements = document.getElementsByClassName('concept_light-tag');
-    for (let element of conceptTagElements) {
-
-        if (element.textContent.trim().toLocaleLowerCase().startsWith('jlpt')) {
-            return element.textContent.trim().slice(-2);
-        }
-    }
-
-    return '';
-}
-
-function getSupplementalInformation() {
-    const element = document.getElementsByClassName('supplemental_info');
+function getSupplementalInformation(meaningsWrapper) {
+    const element = meaningsWrapper.getElementsByClassName('supplemental_info');
     if (element.length > 0) {
         return element.item(0).textContent.trim();
     }
     return '';
 }
 
-function gatherConjugations(type) {
-    const showInflectionsElement = document.getElementsByClassName('show_inflection_table').item(0);
+function gatherConjugations(type, conceptElement) {
+    const showInflectionsElement = conceptElement.getElementsByClassName('show_inflection_table').item(0);
     if (showInflectionsElement) {
         showInflectionsElement.click();
 
@@ -312,7 +292,7 @@ function gatherConjugations(type) {
         }, 500);
         return result;
     } else {
-        const representationElement = document.getElementsByClassName('concept_light-representation').item(0);
+        const representationElement = conceptElement.getElementsByClassName('concept_light-representation').item(0);
         const japaneseElement = representationElement.getElementsByClassName('text').item(0);
         const japanese = japaneseElement.textContent.trim();
 
@@ -472,7 +452,6 @@ function createKanjiNote(kanjiTextContent, meaningsTextContent) {
     // 4. stroke-order
     const strokeOrder = getStrokeOrderDiagram()
 
-    getStrokeOrderDiagram();
     const csv = `${kanji}\t${meaning}\t${jlptLevel}\t${strokeOrder}`;
     const summary = `${kanji} - ${meaning}`;
     saveNote(NOTE_TYPE_KANJI, summary, location.href, csv)
@@ -509,6 +488,11 @@ function copyStrokeOrderDiagramToClipboard() {
 
 function isConjugation(tagsElement) {
     return tagsElement.textContent.toLowerCase().includes('adjective') || tagsElement.textContent.toLowerCase().includes('verb');
+}
+
+function isKeigo(meaningsWrapper) {
+    const supplementalInformation = getSupplementalInformation(meaningsWrapper);
+    return supplementalInformation.includes('sonkeigo') || supplementalInformation.includes('kenjougo');
 }
 
 function isOtherForms(tagsElement) {
