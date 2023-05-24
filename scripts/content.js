@@ -192,6 +192,9 @@ function createWordNote(noteType, conceptElement, tagsElement, meaningElement, m
         if (supplementalInformation.toLowerCase().includes('kenjougo')) {
             additionalFields = ['Kenjougo', 'Humble'].join('\t');
         }
+        if (supplementalInformation.toLowerCase().includes('teineigo')) {
+            additionalFields = ['Teineigo', 'Polite'].join('\t');
+        }
     }
 
     const basicFields = `${japanese}\t${english}\t${type}\t${jlptLevel}\t${supplementalInformation}`;
@@ -503,7 +506,9 @@ function isConjugation(tagsElement) {
 
 function isKeigo(meaningsWrapper) {
     const supplementalInformation = getSupplementalInformation(meaningsWrapper);
-    return supplementalInformation.includes('sonkeigo') || supplementalInformation.includes('kenjougo');
+    return supplementalInformation.includes('sonkeigo')
+        || supplementalInformation.includes('kenjougo')
+        || supplementalInformation.includes('teineigo') ;
 }
 
 function isOtherForms(tagsElement) {
