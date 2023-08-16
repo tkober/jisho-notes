@@ -39,6 +39,28 @@ function addNoteButtonsToAllConcepts() {
     }
 }
 
+function toggleMeaningEmphasis(meaningSpanElement) {
+    if (meaningSpanElement.style.fontWeight === 'bold') {
+        meaningSpanElement.style.fontWeight = '';
+    } else {
+        meaningSpanElement.style.fontWeight = 'bold';
+    }
+}
+
+function makeMeaningsHighlightable(meaningElement) {
+    let meanings = meaningElement.textContent.trim().split(';')
+    meaningElement.textContent = ''
+    for (let meaning of meanings) {
+        let span = document.createElement('span')
+        span.style.cursor = 'pointer';
+        span.textContent = meaning.trim() + '; '
+        span.onclick = (() => {
+            toggleMeaningEmphasis(span)
+        });
+        meaningElement.appendChild(span)
+    }
+}
+
 function addWordNoteButtonsToConcept(conceptElement) {
     const meaningsWrapper = conceptElement.getElementsByClassName('meanings-wrapper').item(0);
     if (meaningsWrapper) {
@@ -47,6 +69,7 @@ function addWordNoteButtonsToConcept(conceptElement) {
             const tagsElement = childNodes.item(i);
             const meaningWrapperElement = childNodes.item(i + 1);
             const meaningElement = meaningWrapperElement.getElementsByClassName('meaning-meaning').item(0);
+            makeMeaningsHighlightable(meaningElement);
 
             if (isOtherForms(tagsElement) || isWikipediaDefinition(tagsElement)) {
                 continue;
@@ -150,12 +173,24 @@ function DropdownAction(title, onClick) {
     return result;
 }
 
+function gatherMeaningText(meaningElement) {
+    var result = '';
+    for (let span of meaningElement.childNodes) {
+        if (span.style.fontWeight === 'bold') {
+            result += '<b>' + span.textContent + '</b>';
+        } else {
+            result += span.textContent;
+        }
+    }
+    return result;
+}
+
 function createWordNote(noteType, conceptElement, tagsElement, meaningElement, meaningsWrapper) {
     const representation = gatherJapanese(conceptElement);
     // 1. japanese
     let japanese = representation.withFurigana;
     // 2. english
-    const english = meaningElement.textContent.trim();
+    const english = gatherMeaningText(meaningElement)
     // 3. type
     const type = tagsElement.textContent.trim();
     // 4. jlpt-level
@@ -508,7 +543,7 @@ function isKeigo(meaningsWrapper) {
     const supplementalInformation = getSupplementalInformation(meaningsWrapper);
     return supplementalInformation.includes('sonkeigo')
         || supplementalInformation.includes('kenjougo')
-        || supplementalInformation.includes('teineigo') ;
+        || supplementalInformation.includes('teineigo');
 }
 
 function isOtherForms(tagsElement) {
