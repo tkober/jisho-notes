@@ -54,10 +54,13 @@ function makeMeaningsHighlightable(meaningElement, separator=';') {
 
     let meanings = meaningElement.textContent.trim().split(separator)
     meaningElement.textContent = ''
+    let i = 1;
     for (let meaning of meanings) {
+        i++;
+        suffix = i > meanings.length ? '' : separator + ' '
         let span = document.createElement('span')
         span.style.cursor = 'pointer';
-        span.textContent = meaning.trim() + separator + ' '
+        span.textContent = meaning.trim() + suffix
         span.onclick = (() => {
             toggleMeaningEmphasis(span)
         });
@@ -204,7 +207,7 @@ function editKanjiMeanings(meaningsElement) {
         currentMeanings += span.textContent
     }
 
-    let newMeanings = prompt('Kanji meanings:', currentMeanings)
+    let newMeanings = prompt('Kanji meanings:', currentMeanings.trim())
     if (newMeanings == null) {
         return ;
     }
