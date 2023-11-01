@@ -112,11 +112,11 @@ function addKanjiNoteButton() {
 
 function WordCardDropdown(conceptElement, tagsElement, meaningElement, meaningsWrapper) {
     let actions = [
-        DropdownAction('Vocabulary Note', (() => {
-            createWordNote(NOTE_TYPE_VOCABULARY, conceptElement, tagsElement, meaningElement, meaningsWrapper)
-        })),
         DropdownAction('Kanji Compound Note', (() => {
             createWordNote(NOTE_TYPE_KANJI_READING, conceptElement, tagsElement, meaningElement, meaningsWrapper)
+        })),
+        DropdownAction('Vocabulary Note', (() => {
+            createWordNote(NOTE_TYPE_VOCABULARY, conceptElement, tagsElement, meaningElement, meaningsWrapper)
         }))
     ]
 
