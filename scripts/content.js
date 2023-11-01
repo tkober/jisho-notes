@@ -47,13 +47,17 @@ function toggleMeaningEmphasis(meaningSpanElement) {
     }
 }
 
-function makeMeaningsHighlightable(meaningElement) {
-    let meanings = meaningElement.textContent.trim().split(';')
+function makeMeaningsHighlightable(meaningElement, separator=';') {
+    if (!meaningElement || !meaningElement.textContent) {
+        return ;
+    }
+
+    let meanings = meaningElement.textContent.trim().split(separator)
     meaningElement.textContent = ''
     for (let meaning of meanings) {
         let span = document.createElement('span')
         span.style.cursor = 'pointer';
-        span.textContent = meaning.trim() + '; '
+        span.textContent = meaning.trim() + separator + ' '
         span.onclick = (() => {
             toggleMeaningEmphasis(span)
         });
@@ -96,9 +100,11 @@ function addKanjiNoteButton() {
     const kanjiElement = document.getElementsByClassName('character').item(0);
 
     if (meaningsElement && kanjiElement) {
+        makeMeaningsHighlightable(meaningsElement, ',');
+
         const button = KanjiCardDropdown(
             kanjiElement.textContent,
-            meaningsElement.textContent
+            meaningsElement
         );
         meaningsElement.insertAdjacentElement('afterbegin', button);
     }
@@ -133,10 +139,10 @@ function WordCardDropdown(conceptElement, tagsElement, meaningElement, meaningsW
     return Dropdown(actions);
 }
 
-function KanjiCardDropdown(kanjiTextContent, meaningsTextContent) {
+function KanjiCardDropdown(kanjiTextContent, meaningsElement) {
     return Dropdown([
         DropdownAction('Kanji Note', (() => {
-            createKanjiNote(kanjiTextContent, meaningsTextContent)
+            createKanjiNote(kanjiTextContent, meaningsElement)
         })),
         DropdownAction('Copy Stroke Order', (() => {
             copyStrokeOrderDiagramToClipboard()
@@ -491,11 +497,11 @@ function closeConjugationsModal() {
     }
 }
 
-function createKanjiNote(kanjiTextContent, meaningsTextContent) {
+function createKanjiNote(kanjiTextContent, meaningsElement) {
     // 1. kanji
     const kanji = kanjiTextContent.trim();
     // 2. meaning
-    const meaning = meaningsTextContent.trim();
+    const meaning = gatherMeaningText(meaningsElement);
     // 3. jlpt-level
     const jlptLevel = getKanjiJlptLevel();
     // 4. stroke-order
