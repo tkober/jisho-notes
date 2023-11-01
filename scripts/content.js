@@ -180,8 +180,12 @@ function DropdownAction(title, onClick) {
 }
 
 function gatherMeaningText(meaningElement) {
-    var result = '';
+    let result = '';
     for (let span of meaningElement.childNodes) {
+        if (span.nodeName !== 'SPAN') {
+            continue ;
+        }
+
         if (span.style.fontWeight === 'bold') {
             result += '<b>' + span.textContent + '</b>';
         } else {
