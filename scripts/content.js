@@ -146,6 +146,9 @@ function KanjiCardDropdown(kanjiTextContent, meaningsElement) {
         })),
         DropdownAction('Copy Stroke Order', (() => {
             copyStrokeOrderDiagramToClipboard()
+        })),
+        DropdownAction('Edit Meanings', (() => {
+            editKanjiMeanings(meaningsElement)
         }))
     ]);
 }
@@ -193,6 +196,21 @@ function gatherMeaningText(meaningElement) {
         }
     }
     return result;
+}
+
+function editKanjiMeanings(meaningsElement) {
+    let currentMeanings = ''
+    for (let span of meaningsElement.getElementsByTagName('span')) {
+        currentMeanings += span.textContent
+    }
+
+    let newMeanings = prompt('Kanji meanings:', currentMeanings)
+    if (newMeanings == null) {
+        return ;
+    }
+
+    meaningsElement.textContent = newMeanings
+    addKanjiNoteButton()
 }
 
 function createWordNote(noteType, conceptElement, tagsElement, meaningElement, meaningsWrapper) {
