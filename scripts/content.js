@@ -193,7 +193,7 @@ function gatherMeaningText(meaningElement) {
         }
 
         if (span.style.fontWeight === 'bold') {
-            result += '<b>' + span.textContent + '</b>';
+            result += '<u>' + span.textContent + '</u>';
         } else {
             result += span.textContent;
         }
